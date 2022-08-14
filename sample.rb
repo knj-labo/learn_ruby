@@ -6,3 +6,7 @@ puts a
 b = 'こんにちは'
 
 puts b
+
+n = 2
+
+puts n *= 3

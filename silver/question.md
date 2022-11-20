@@ -440,3 +440,186 @@ p ["apple", "banana"] __(1)__ ["banana", "carrot"]
   - わからん
 
 ---------------------------------------------------------------------------
+
+**Q31. 以下のコードがあります。**
+
+```
+p %i(x1 x2 x3)
+```
+
+- わからん 
+
+---------------------------------------------------------------------------
+
+**Q32. 以下のコードがあります。**
+
+```
+class SomeError < StandardError; end
+class SomeOtherError < SomeError; end
+
+def meth1
+  raise SomeOtherError.new("error")
+end
+
+begin
+  meth1
+rescue SomeError
+  print "SomeError"
+rescue SomeOtherError
+  print "SomeOtherError"
+end
+```
+
+- (d) `SomeOtherError`
+
+---------------------------------------------------------------------------
+
+**Q33. 以下のコードがあります。**
+
+```
+begin
+  ans = 100/0
+  puts ans
+rescue ZeroDivisionError
+  puts "Error: ZeroDivisionError"
+  exit 1
+ensure
+  puts "DONE!"
+end
+```
+
+*(b)*
+
+```
+Error: ZeroDivisionError
+```
+
+---------------------------------------------------------------------------
+
+**Q34. Rubyのクラスの説明として正しいものを選択してください。(1つ選択)**
+
+クラスのスーパークラスを明示的に指定しなかった場合、
+
+- (a) 例外`UndefinedParentClassError`が発生する
+
+---------------------------------------------------------------------------
+
+**Q35. 以下のコードがあります。**
+
+```
+class Object
+  def moo
+    puts "MOO!"
+  end
+end
+
+"Cow".moo
+```
+
+- (c) `MOO!`
+
+---------------------------------------------------------------------------
+
+**Q36. 以下の実行結果を出力するコードがあります。
+__(1)__に入る適切な記述を選択してください。(1つ選択)**
+
+```
+class Shouter
+  def __(1)__(message)
+    @message = message
+  end
+
+  def greet
+    puts @message.upcase
+  end
+end
+
+g = Shouter.new("Hello, world!")
+g.greet
+
+[出力]
+HELLO, WORLD!
+```
+
+- (c) `initialize`
+
+---------------------------------------------------------------------------
+
+**Q37. 以下の実行結果を出力するコードがあります。
+__(1)__に入る適切な記述を選択してください。(1つ選択)**
+
+```
+class Shouter
+  def initialize(message)
+    @message = message
+  end
+
+  def greet
+    puts @message.upcase
+  end
+end
+
+g = __(1)__("Hello, world!")
+g.greet
+
+[出力]
+HELLO, WORLD!
+```
+
+- (d) `Shouter.new`
+
+---------------------------------------------------------------------------
+
+**Q38. 以下のコードがあります。**
+
+```
+class Foo
+  attr_reader :var
+  def initialize
+    @var = "apple"
+  end
+end
+
+class Bar < Foo
+  def initialize
+    @var = "banana"
+    super
+  end
+end
+
+bar = Bar.new
+puts bar.var
+```
+
+- (d) 実行時にエラーになる
+
+---------------------------------------------------------------------------
+
+**Q39. 以下の実行結果を出力するコードがあります。
+__(1)__に入る適切な記述を選択してください。(2つ選択)**
+
+```
+puts "$foo$".__(1)__("$")
+
+[出力]
+foo$
+```
+
+- わからん
+
+---------------------------------------------------------------------------
+
+**Q40. 以下の実行結果を出力するコードがあります。
+__(1)__に入る適切な記述を選択してください。(1つ選択)**
+
+```
+r = "a".."e"
+p r.__(1)__
+
+[出力]
+["a", "b", "c", "d", "e"]
+```
+
+- (d) `to_array`
+
+---------------------------------------------------------------------------

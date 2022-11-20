@@ -32,3 +32,6 @@ We also promised to tell you more about the **interpreter**. The interpreter is 
 
 ## Naming Conventions
 There are many different kinds of variables you’ll encounter as you progress through these courses, but right now we’re just concerned with regular old **local variables**. By convention, these variables should start with a lowercase letter and words should be separated by underscores, like counter and masterful_method. Ruby won’t stop you from starting your local variables with other symbols, such as capital letters, $s, or @s, but by convention these mean different things, so it’s best to avoid confusion by doing what the Ruby community does.
+
+## Strings and String Methods
+Well done! Let’s do a little review of string methods. Remember, you call a method by using the . operator, like this: "string".method.

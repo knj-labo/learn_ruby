@@ -66,3 +66,101 @@ my_hash = Hash.new
 ```
 Setting a variable equal to `Hash.new` creates a new, empty hash; it’s the same as setting the variable equal to empty curly braces (`{}`).
 
+## Adding to a Hash
+We can add to a hash two ways: if we created it using literal notation, we can simply add a new key-value pair directly between the curly braces. If we used `Hash.new`, we can add to the hash using bracket notation:
+```ruby
+pets = Hash.new
+pets["Stevie"] = "cat"
+# Adds the key "Stevie" with the
+# value "cat" to the hash
+```
+
+## Accessing Hash Values
+You can access values in a hash just like an array.
+```ruby
+pets = {
+ "Stevie" => "cat",
+ "Bowser" => "hamster",
+ "Kevin Sorbo" => "fish"
+}
+
+puts pets["Stevie"]
+# will print "cat"
+```
+1. In the example above, we create a hash called `pets`. 
+2. Then we print cat by accessing the key `"Stevie"` in the pets hash.
+
+## (Re)Introduction to Iteration
+We could use a whole bunch of different methods for looping in a program. When we loop over an array or a hash, we say that we iterate over it.
+
+We’ll be using the `.each` iterator to iterate over arrays and hashes in this section. Take a look at the code in the editor to see one example of how we might go about this
+```ruby
+friends = ["Milhouse", "Ralph", "Nelson", "Otto"]
+
+family = { "Homer" => "dad",
+  "Marge" => "mom",
+  "Lisa" => "sister",
+  "Maggie" => "sister",
+  "Abe" => "grandpa",
+  "Santa's Little Helper" => "dog"
+}
+
+friends.each { |x| puts "#{x}" }
+family.each { |x, y| puts "#{x}: #{y}" }
+```
+
+## Iterating Over Arrays
+Iterating over arrays is easier than it looks.
+```ruby
+numbers = [1, 2, 3, 4, 5]
+numbers.each { |element| puts element }
+```
+1. In the example above, we create an array called numbers with 5 elements. 
+2. Then we say, “Take this array and for each element, print it to the console.” As usual, we can use any placeholder name for the bit between two | | characters.
+
+## Iterating Over Multidimensional Arrays
+Now let’s see how to iterate over a multidimensional array.
+
+We’ve created a 2-D array, `s` (for “sandwiches”). We want to iterate over `s` in such a way that we don’t print out each element as an array, like `["ham", "swiss"]`, but each element within each sub-array, so we get a list of all the meats and cheeses within `s`.
+
+If we just wanted to access "swiss", we could type
+```ruby
+s[0][1]
+```
+Meaning, “bring me the second element of the first element,” which is “swiss.” If we iterate over a regular array using
+```ruby
+array.each { |element| action }
+```
+then how might we iterate over an array of arrays?
+
+```ruby
+s = [["ham", "swiss"], ["turkey", "cheddar"], ["roast beef", "gruyere"]]
+
+s.each { |sub_array| sub_array.each { |array| puts array }}
+```
+
+## Iterating Over Hashes
+When iterating over hashes, we need two placeholder variables to represent each key/value pair.
+```ruby
+restaurant_menu = {
+ "noodles" => 4,
+ "soup" => 3,
+ "salad" => 2
+}
+```
+```ruby
+restaurant_menu.each do |item, price|
+  puts "#{item}: #{price}"
+end
+```
+1. In the example above, we create a new hash called restaurant_menu. 
+2. Then, we loop through the restaurant_menu hash and assign the key to item and the value to price for each iteration. 
+3. Finally, we puts out:
+```ruby
+noodles: 4
+soup: 3
+salad: 2
+```
+
+## Multidimensional Arrays
+Great work! You’ve learned a lot in this lesson. Let’s do a little review to be sure you really know your stuff.

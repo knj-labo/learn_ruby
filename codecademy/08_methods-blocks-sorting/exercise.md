@@ -172,3 +172,80 @@ def double(n)
 end
 ```
 The example above is just a syntax reminder.
+
+## Methods With Arguments
+Good! Now let’s make our method a bit more complex by adding arguments and a return statement.
+```ruby
+def welcome(name)
+  return "Hello, #{name}"
+end
+```
+
+## Blocks
+Let’s go over what we learned about blocks.
+```ruby
+numbers = [5, 2, 8]
+sum = 0
+
+numbers.each do |n|
+  sum += n
+end
+puts sum
+```
+The example above is just a reminder about syntax. We calculate the sum of a list of numbers.
+
+## Sorting
+Finally, let’s review what we learned about sorting.
+```ruby
+books.sort! do |firstBook, secondBook|
+  firstBook <=> secondBook
+end
+```
+Remember that the above example was how we sorted in alphabetical order.
+
+## What You'll Be Building
+We noticed in the last lesson that .sort! didn’t have a built-in way of handling sorting in reverse alphabetical order. Now that we know how to write our own Ruby methods, we can fix that!
+```ruby
+def alphabetize(arr, rev=false)
+  if rev
+    arr.sort { |item1, item2| item2 <=> item1 }
+  else
+    arr.sort { |item1, item2| item1 <=> item2 }
+  end
+end
+
+books = ["Heart of Darkness", "Code Complete", "The Lorax", "The Prophet", "Absalom, Absalom!"]
+
+puts "A-Z: #{alphabetize(books)}"
+puts "Z-A: #{alphabetize(books, true)}"
+```
+
+## Sorting
+Great! Now let’s add a little logic to our method.
+```ruby
+numbers = [5, 1, 3, 8]
+numbers.sort!
+puts numbers
+```
+1. In the above example, we create a new array called numbers. 
+2. Then, we sort the array. 
+3. Finally, we print out 1, 3, 5, 8, the sorted array.
+In Ruby, there are two sorting methods, .sort or sort!. The first method, .sort, simply returns a sorted array while leaving the original array alone. The second method, .sort!, modifies the actual array.
+
+## Sorting With Control Flow
+Great! Now we need to add the right logic to our method.
+```ruby
+def alphabetize(arr, rev=false)
+  if rev
+    return arr.reverse!
+  else 
+    return arr.sort!
+  end 
+end
+
+numbers = [5, 1, 3, 8]
+puts alphabetize(numbers)
+```
+1. In the example above, we create an array called numbers. 
+2. Then, we reverse the array. Like with .sort!, the exclamation mark means we modify the actual array. 
+3. Finally, we print out 5, 4, 3, 2, and 1.

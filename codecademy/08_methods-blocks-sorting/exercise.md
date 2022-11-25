@@ -163,3 +163,12 @@ Passing a block to a method is a great way of abstracting certain tasks from the
 # (It chooses to ignore the passed item, which is allowed.)
 [1, 2, 3, 4, 5].each { |i| puts i * 5 }
 ```
+
+## Basic Methods
+Let’s quickly review how to create a basic Ruby method.
+```ruby
+def double(n)
+  return n * 2
+end
+```
+The example above is just a syntax reminder.

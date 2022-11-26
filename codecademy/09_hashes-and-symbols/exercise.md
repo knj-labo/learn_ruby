@@ -89,5 +89,119 @@ symbols = []
 strings.each do |string|
   symbols.push(string.to_sym)
 end
+```
 
+## Many Paths to the Same Summit
+Remember, there are always many ways of accomplishing something in Ruby. Converting strings to symbols is no different!
+
+Besides using `.to_sym`, you can also use `.intern`. This will internalize the string into a symbol and works just like `.to_sym`:
+```ruby
+"hello".intern
+# ==> :hello
+```
+When you’re looking at someone else’s code, you might see `.to_sym` or `.intern` (or both!) when converting strings to symbols.
+```ruby
+strings = ["HTML", "CSS", "JavaScript", "Python", "Ruby"]
+
+# Add your code below!
+symbols = []
+strings.each do |string|
+  symbols.push(string.intern)
+end
+```
+## All Aboard the Hash Rocket!
+The hash syntax you’ve seen so far (with the => symbol between keys and values) is sometimes nicknamed the hash rocket style.
+```ruby
+numbers = {
+  :one => 1,
+  :two => "two",
+  :three => 3,
+}
+```
+This is because the => looks like a tiny rocket!
+
+Let’s build a hash from the ground up using symbols as keys.
+
+## The Hash Rocket Has Landed
+However, the hash syntax changed in Ruby 1.9. Just when you were getting comfortable!
+
+The good news is that the changed syntax is easier to type than the old hash rocket syntax, and if you’re used to JavaScript objects or Python dictionaries, it will look very familiar:
+```ruby
+new_hash = {
+one: 1,
+two: 2,
+three: 3
+}
+```
+The two changes are:
+
+You put the colon at the end of the symbol, not at the beginning;
+You don’t need the hash rocket anymore.
+It’s important to note that even though these keys have colons at the end instead of the beginning, they’re still symbols!
+```ruby
+puts new_hash
+# => { :one => 1, :two => 2, :three => 3 }
+```
+From now on, we’ll use the 1.9 hash syntax when giving examples or providing default code. You’ll want to be familiar with the hash rocket style when reading other people’s code, which might be older.
+
+## Dare to Compare
+We mentioned that hash lookup is faster with symbol keys than with string keys. Here, we’ll prove it!
+
+The code in the editor uses some new syntax, so don’t worry about understanding all of it just yet. It builds two alphabet hashes: one that pairs string letters with their place in the alphabet ( “a” with 1, “b” with 2…) and one that uses symbols (:a with 1, :b with 2…). We’ll look up the letter “r” 100,000 times to see which process runs faster!
+
+It’s good to keep in mind that the numbers you’ll see are only fractions of a second apart, and we did the hash lookup 100,000 times each. It’s not much of a performance increase to use symbols in this case, but it’s definitely there!
+```ruby
+require 'benchmark'
+
+string_AZ = Hash[("a".."z").to_a.zip((1..26).to_a)]
+symbol_AZ = Hash[(:a..:z).to_a.zip((1..26).to_a)]
+
+string_time = Benchmark.realtime do
+  100_000.times { string_AZ["r"] }
+end
+
+symbol_time = Benchmark.realtime do
+  100_000.times { symbol_AZ[:r] }
+end
+
+puts "String time: #{string_time} seconds."
+puts "Symbol time: #{symbol_time} seconds."
+```
+```shell
+String time: 0.007089582999469712 seconds.
+Symbol time: 0.004449522995855659 seconds.
+```
+
+## More Methods, More Solutions
+Great work!
+
+We’ve often found we only want the key or value associated with a key/value pair, and it’s kind of a pain to put both into our block and only work with one. Can we iterate over just keys or just values?
+
+This is Ruby. Of course we can.
+
+Ruby includes two hash methods, .`each_key` and `.each_value`, that do exactly what you’d expect:
+```ruby
+my_hash = { one: 1, two: 2, three: 3 }
+
+my_hash.each_key { |k| print k, " " }
+# ==> one two three
+
+my_hash.each_value { |v| print v, " " }
+# ==> 1 2 3
+```
+Let’s wrap up our study of Ruby hashes and symbols by testing these methods out.
+```ruby
+movie_ratings = {
+  memento: 3,
+  primer: 3.5,
+  the_matrix: 3,
+  truman_show: 4,
+  red_dawn: 1.5,
+  skyfall: 4,
+  alex_cross: 2,
+  uhf: 1,
+  lion_king: 3.5
+}
+# Add your code below!
+movie_ratings.each_key { |k| puts k }
 ```

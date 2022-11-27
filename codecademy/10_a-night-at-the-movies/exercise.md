@@ -128,3 +128,50 @@ else
   puts "Error!"
 end
 ```
+
+## Not My Type
+Perfect! Our program is really coming along.
+
+You might have wondered how we’re going to get our movies and ratings from the user—which come in as strings—into the hash where we want our movies to be symbols and our ratings to be integers. Built-in Ruby magic to the rescue!
+
+Ruby’s `.to_sym` method can convert a string to a symbol, and `.to_i` will convert a string to an integer.
+
+## Error! Error!
+All right! We’re nearly done with the “add” part of our `case`. The final thing we’ll want to do is perform a check to see whether the movie to be added is already in the hash.
+
+To do this, we’ll add an `if`/`else` statement.
+
+The .nil? method will return true if the object it’s called on is nil, and false otherwise:
+```ruby
+nil_variable = nil
+age = 26
+
+nil_variable.nil? # true
+age.nil? # false
+```
+
+## Update
+Perfect! Let’s move on to the next branch of our case statement, which handles updating an existing movie in the hash. (This should be very similar to the work we did in the “add” branch!) We’ll do this in three steps:
+
+## Display
+Awesome! Now let’s handle displaying the contents of our movies hash. This will be a little different from what we did for the “add” and “update” branches.
+
+## Delete
+Almost there! Let’s handle the “delete” part of our case statement, which will remove whatever key the user specifies from the hash. (This will be very similar to what we did for “add” and “update.”)
+
+Ruby makes it easy to remove a movie/rating pair from our hash: we just write movies.delete(title.to_sym)!
+```ruby
+when "delete"
+  puts "What movie do you want to delete?"
+  title = gets.chomp
+  if movies[title.to_sym].nil?
+    puts "Movie not found!"
+  else
+    movies.delete(title.to_sym)
+  end
+```
+
+## Nice Work!
+Fantastic! You built a little app with only a few dozen lines of code. Impressive, isn’t it?
+
+The four verbs your program knows—add, display, update, and delete—are universal. This acronym is better known as CRUD for create, read, update, and delete (respectively). These are the actions you take when you update an entry in a database, ask a website for information, or write a blog post. Being familiar with this setup is good, because you’ll see it in everything from API calls to web frameworks like Ruby on Rails.

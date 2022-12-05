@@ -204,3 +204,81 @@ end
 class MyApp < Application
 end
 ```
+## Override!
+Sometimes you’ll want one class that inherits from another to not only take on the methods and attributes of its parent, but to override one or more of them.
+
+For instance, you might have an Email class that inherits from Message. Both classes might have a send method that sends them, but the e-mail version may have to identify valid e-mail addresses and use a bunch of e-mail protocols that Message knows nothing about. Rather than add a send_email method to your derived class and inherit a send method you’ll never use, you can instead just explicitly create a send method in the Email class and have it do all the email-sending work.
+
+This new version of send will override (that is, replace) the inherited version for any object that is an instance of Email.
+```ruby
+class Creature
+  def initialize(name)
+    @name = name
+  end
+  
+  def fight
+    return "Punch to the chops!"
+  end
+end
+
+# Add your code below!
+class Dragon < Creature
+  def fight
+    return "Breathes fire!"
+  end
+end
+```
+## When Good isn't Good Enough
+On the flip side, sometimes you’ll be working with a derived class (or subclass) and realize that you’ve overwritten a method or attribute defined in that class’ base class (also called a parent or superclass) that you actually need. Have no fear! You can directly access the attributes or methods of a superclass with Ruby’s built-in super keyword.
+
+The syntax looks like this:
+```ruby
+class DerivedClass < Base
+  def some_method
+    super(optional args)
+    # Some stuff
+    end
+  end
+end
+```
+When you call super from inside a method, that tells Ruby to look in the superclass of the current class and find a method with the same name as the one from which super is called. If it finds it, Ruby will use the superclass’ version of the method.
+## There Can Be Only One!
+Any given Ruby class can have only one superclass. Some languages allow a class to have more than one parent, which is a model called multiple inheritance. This can get really ugly really fast, which is why Ruby disallows it.
+
+However, there are instances where you want to incorporate data or behavior from several classes into a single class, and Ruby allows this through the use of mixins. We’ll learn about mixins in a later lesson! For now, we’ll demonstrate what happens if you try to do multiple inheritance in Ruby.
+
+The demo code we’re about to show you includes a fancy trick: if you want to end a Ruby statement without going to a new line, you can just type a semicolon. This means you can write something like
+```ruby
+class Monkey
+end
+```
+on just one line: class Monkey; end. This is a time saver when you’re writing something very short, like an empty class or method definition.
+```ruby
+class Message 
+  @@messages_sent = 0
+  def initialize(from, to)
+    @from = from
+    @to = to
+    @@messages_sent += 1
+  end  
+end
+```
+
+```rb
+class Message 
+  @@messages_sent = 0
+  def initialize(from, to)
+    @from = from 
+    @to = to 
+    @@messages_sent +=1 
+  end
+end
+
+class Email < Message
+  def initialize(from, to)
+    super
+  end
+end
+
+my_message = Message.new("Ian", "Alex")
+```

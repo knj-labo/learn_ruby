@@ -188,3 +188,121 @@ It doesn’t make sense to include variables in modules, since variables (by def
 Ruby doesn’t make you keep the same value for a constant once it’s initialized, but it will warn you if you try to change it. Ruby constants are written in ALL_CAPS and are separated with underscores if there’s more than one word.
 
 An example of a Ruby constant is PI, which lives in the Math module and is approximately equal to 3.141592653589793. We created our own PI in the previous exercise, but don’t worry: because they’re in separate modules, Ruby knows to keep them separate.
+
+## Resolve to Keep Learning
+One of the main purposes of modules is to separate methods and constants into named spaces. This is called (conveniently enough) namespacing, and it’s how Ruby doesn’t confuse Math::PI and Circle::PI.
+
+See that double colon we just used? That’s called the scope resolution operator, which is a fancy way of saying it tells Ruby where you’re looking for a specific bit of code. If we say Math::PI, Ruby knows to look inside the Math module to get that PI, not any other PI (such as the one we created in Circle).
+
+Let’s get some practice in with an existing Ruby module: Math.
+```rb
+puts Math::PI
+```
+
+## A Few Requirements
+Perfect!
+
+Some modules, like `Math`, are already present in the interpreter. Others need to be explicitly brought in, however, and we can do this using `require`. We can do this simply by typing
+```rb
+require 'module'
+```
+We want to use the Ruby `Date` module to show today’s date, but we haven’t `required` it yet!
+
+## Feeling Included
+We can do more than just `require` a module, however. We can also `include` it!
+
+Any class that `includes` a certain module can use those module’s methods!
+
+A nice effect of this is that you no longer have to prepend your constants and methods with the module name. Since everything has been pulled in, you can simply write PI instead of Math::PI.
+```rb
+class Angle
+  include Math
+  attr_accessor :radians
+  
+  def initialize(radians)
+    @radians = radians
+  end
+  
+  def cosine
+    cos(@radians)
+  end
+end
+
+acute = Angle.new(1)
+acute.cosine
+```
+## The Marriage of Modules and Classes
+What we did in the last exercise might not have seemed strange to you, but think about it: we mixed together the behaviors of a class and a module!
+
+When a module is used to mix additional behavior and information into a class, it’s called a **mixin**. Mixins allow us to customize a class without having to rewrite code!
+
+## Imitating Multiple Inheritance
+Now you understand why we said mixins could give us the ability to mimic inheriting from more than one class: by mixing in traits from various modules as needed, we can add any combination of behaviors to our classes we like!
+```rb
+# Create your module here!
+module MartialArts
+  def swordsman
+    puts "I'm a swordsman."
+  end
+end
+
+class Ninja
+  include MartialArts
+  def initialize(clan)
+    @clan = clan
+  end
+end
+
+class Samurai
+  include MartialArts
+  def initialize(shogun)
+    @shogun = shogun
+  end
+end
+```
+## Extend Your Knowledge
+Whereas include mixes a module’s methods in at the instance level (allowing instances of a particular class to use the methods), the extend keyword mixes a module’s methods at the class level. This means that class itself can use the methods, as opposed to instances of the class.
+```rb
+# ThePresent has a .now method that we'll extend to TheHereAnd
+
+module ThePresent
+  def now
+    puts "It's #{Time.new.hour > 12 ? Time.new.hour - 12 : Time.new.hour}:#{Time.new.min} #{Time.new.hour > 12 ? 'PM' : 'AM'} (GMT)."
+  end
+end
+
+class TheHereAnd
+  extend ThePresent
+end
+
+TheHereAnd.now
+```
+## A Matter of Public Knowledge
+All right! Let’s do a little practice with public methods.
+```rb
+class Application
+  attr_accessor :status
+  def initialize; end
+  # Add your method here!
+  public
+  def print_status
+    puts "All systems go!"
+  end
+end
+```
+```rb
+class Application
+  attr_accessor :status
+  def initialize; end
+  # Add your method here!
+  public
+  def print_status
+    puts "All systems go!"
+  end
+
+  private
+  def password
+    12345
+  end
+end
+```

@@ -50,4 +50,9 @@ RSpec.describe User, type: :model do
 
   # ユーザーのフルネームを文字列として返すこと
   it "returns a user's full name as a string"
+
+  # 2と1を足すと3になること
+  it "adds 2 and 1 to make 3" do
+    expect(2 + 1).to eq 3
+  end
 end

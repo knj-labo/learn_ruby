@@ -11,6 +11,7 @@ RSpec.describe User, type: :model do
    )
    expect(user).to be_valid
  end
+
  # 名がなければ無効な状態であること
  it "is invalid without a first name" do
    user = User.new(first_name: nil)

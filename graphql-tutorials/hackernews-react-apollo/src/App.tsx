@@ -2,6 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
+import {
+    ApolloProvider,
+    ApolloClient,
+    createHttpLink,
+    InMemoryCache
+} from '@apollo/client';
+
 function App() {
   const [count, setCount] = useState(0)
 

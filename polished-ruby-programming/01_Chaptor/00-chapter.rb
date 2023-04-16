@@ -176,3 +176,40 @@ v
 # => 0.1109375e4
 v.to_s('F')
 # => "1109.375"
+
+## Understanding how symbols differ from strings
+
+foo.add(bar)
+
+# --
+
+method = :add
+foo.send(method, bar)
+
+# --
+
+method = "add"
+foo.send(method, bar)
+
+# --
+
+object.methods.sort
+
+# --
+
+def switch(value)
+  case value
+  when :foo
+    # foo
+  when :bar
+    # bar
+  when :baz
+    # baz
+  end
+end
+
+# --
+
+def append2(value)
+  value.gsub(/foo/, "bar")
+end

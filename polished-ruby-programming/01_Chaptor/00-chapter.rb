@@ -213,3 +213,117 @@ end
 def append2(value)
   value.gsub(/foo/, "bar")
 end
+
+## Learning how best to use arrays, hashes, and sets
+
+[[:foo, 1], [:bar, 3], [:baz, 7]].each do |sym, i|
+  # ...
+end
+
+# --
+
+{foo: 1, bar: 3, baz: 7}.each do |sym, i|
+  # ...
+end
+
+# --
+
+album_infos = 100.times.flat_map do |i|
+  10.times.map do |j|
+    ["Album #{i}", j, "Artist #{j}"]
+  end
+end
+
+# --
+
+album_artists = {}
+album_track_artists = {}
+album_infos.each do |album, track, artist|
+  (album_artists[album] ||= []) << artist
+  (album_track_artists[[album, track]] ||= []) << artist
+end
+album_artists.each_value(&:uniq!)
+
+# --
+
+lookup = ->(album, track=nil) do
+  if track
+    album_track_artists[[album, track]]
+  else
+    album_artists[album]
+  end
+end
+
+# --
+
+albums = {}
+album_infos.each do |album, track, artist|
+  ((albums[album] ||= {})[track] ||= []) << artist
+end
+
+# --
+
+lookup = ->(album, track=nil) do
+  if track
+    albums.dig(album, track)
+  else
+    a = albums[album].each_value.to_a
+    a.flatten!
+    a.uniq!
+    a
+  end
+end
+
+# --
+
+albums = {}
+album_infos.each do |album, track, artist|
+  album_array = albums[album] ||= [[]]
+  album_array[0] << artist
+  (album_array[track] ||= []) << artist
+end
+albums.each_value do |array|
+  array[0].uniq!
+end
+
+# --
+
+lookup = ->(album, track=0) do
+  albums.dig(album, track)
+end
+
+# --
+
+album_artists = album_infos.flat_map(&:last)
+album_artists.uniq!
+
+# --
+
+lookup = ->(artists) do
+  album_artists & artists
+end
+
+# --
+
+album_artists = {}
+album_infos.each do |_, _, artist|
+  album_artists[artist] ||= true
+end
+
+# --
+
+lookup = ->(artists) do
+  artists.select do |artist|
+    album_artists[artist]
+  end
+end
+
+# --
+
+album_artists = Set.new(album_infos.flat_map(&:last))
+
+# --
+
+lookup = ->(artists) do
+  album_artists & artists
+end

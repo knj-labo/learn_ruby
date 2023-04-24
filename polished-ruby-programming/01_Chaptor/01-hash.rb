@@ -19,3 +19,21 @@ album_infos.each do |album, track, artist|
   # `<< artist appends` the artist to the array associated with the [album, track] key in the album_track_artists hash.
   (album_track_artists[[album, track]] ||= []) << artist
 end
+
+# album_artists.each_value(&:uniq!) iterates through the values of the album_artists hash (arrays of artists)
+# and applies the uniq! method to each of them. This method removes duplicate artists in-place within the array.
+album_artists.each_value(&:uniq!)
+
+# lookup = ->(album, track=nil) do defines a lambda function called lookup with two parameters: album and an optional track with a default value of nil.
+# if track checks if the track parameter has a value other than nil. If it does, the function returns the artists associated with the specific [album, track] key from the album_track_artists hash.
+# If the track parameter is nil, the function returns the artists associated with the album key from the album_artists hash.
+lookup = ->(album, track=nil) do
+  if track
+    album_track_artists[[album, track]]
+  else
+    album_artists[album]
+  end
+end
+
+## example
+puts lookup.call("Album 0")

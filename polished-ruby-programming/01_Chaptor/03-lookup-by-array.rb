@@ -1,5 +1,4 @@
-
-# `100.times.flat_map` iterates 100 times (from 0 to 99) and returns a new array with the concatenated results of the inner block.
+# `100.times.flat_map iterates 100 times (from 0 to 99) and returns a new array with the concatenated results of the inner block.
 # `10.times.map` iterates 10 times (from 0 to 9) and creates an array of arrays, each containing album, track, and artist information.
 album_infos = 100.times.flat_map do |i|
   10.times.map do |j|

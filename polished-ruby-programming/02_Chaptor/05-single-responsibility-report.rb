@@ -38,7 +38,13 @@ class ReportFormatter
 end
 
 class SimpleReportFormatter
+  def format(report_content)
+    "Simple Report: #{report_content.data}"
+  end
 end
 
 class AdvancedReportFormatter
+  def format(report_content)
+    "Advanced Report: #{report_content.data.upcase}"
+  end
 end

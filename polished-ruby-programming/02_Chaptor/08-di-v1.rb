@@ -1,7 +1,8 @@
 class CurrentDay
-  def initialize(date: Date.today)
+  def initialize(date: Date.today,
+                 schedule_class: MonthlySchedule)
     @date = date
-    @schedule = MonthlySchedule.new(date.year, date.month)
+    @schedule = schedule_class.new(date.year, date.month)
   end
 
   def work_hours

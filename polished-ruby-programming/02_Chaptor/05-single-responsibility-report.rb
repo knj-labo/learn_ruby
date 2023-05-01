@@ -23,3 +23,22 @@ class ReportContent
     @data = data
   end
 end
+
+class ReportFormatter
+  def self.for_type(report_type)
+    case report_type
+    when :simple
+      SimpleReportFormatter
+    when :advanced
+      AdvancedReportFormatter
+    else
+      raise ArgumentError, "Unsupported report type: #{report_type}"
+    end
+  end
+end
+
+class SimpleReportFormatter
+end
+
+class AdvancedReportFormatter
+end

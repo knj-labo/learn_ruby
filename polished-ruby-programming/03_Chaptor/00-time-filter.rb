@@ -18,10 +18,14 @@ class TimeFilter
     start = self.start
     finish = self.finish
 
-    proc do |value|
-      next false if start && value < start
-      next false if finish && value > finish
-      true
+    if start && finish
+      proc{|value| value >= start && value <= finish}
+    elsif start
+      proc{|value| value >= start}
+    elsif finish
+      proc{|value| value <= finish}
+    else
+      proc{|value| true}
     end
   end
 end

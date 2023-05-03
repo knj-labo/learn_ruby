@@ -29,5 +29,3 @@ class TimeFilter
     end
   end
 end
-
-end

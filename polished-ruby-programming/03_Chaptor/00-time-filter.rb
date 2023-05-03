@@ -15,13 +15,15 @@ class TimeFilter
   # to start and less than or equal to finish.
   # If either start or finish is not specified (i.e., nil), the filter does not apply that constraint.
   def to_proc
-    proc do |value|
-      start = self.start
-      finish = self.finish
+    start = self.start
+    finish = self.finish
 
+    proc do |value|
       next false if start && value < start
       next false if finish && value > finish
       true
     end
   end
+end
+
 end

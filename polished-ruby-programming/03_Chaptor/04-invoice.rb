@@ -7,7 +7,8 @@ class Invoice
   end
 
   def total_tax
-    @total_tax ||= @tax_rate * @line_items.sum do |item|
+    return @total_tax if defined?(@total_tax)
+    @total_tax = @tax_rate * @line_items.sum do |item|
       item.price * item.quantity
     end
   end
